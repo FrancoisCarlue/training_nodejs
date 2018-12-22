@@ -1,0 +1,16 @@
+{
+  "name": "formation_nodejs_1_20181222",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.4.0",
+    "path": "^0.12.7"
+  }
+}
