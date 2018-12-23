@@ -1,53 +1,15 @@
 var path = require('path');
 var express = require('express');
-var Promise = require('bluebird');
-var fs = Promise.promisifyAll(require('fs'));
+Promise = require('bluebird');
+fs = Promise.promisifyAll(require('fs'));
+logLib = require('./lib/log'); //bien partir de la racine pour le require de notre lib maison
 
-var app = express();
+app = express(); // mis en global pour que ce soit accessible aux autres fichiers de routing
 
 app.use(express.static('public'));
 
-app.get('/users' , function (req,res) {
-    var users = [
-        {
-            "id" : "0",
-            "name" : "Dupont",
-            "lastname" : "Maurice",
-            "age" : "55",
-            "job" : "Technical support",
-            "tel" : "0123456789"
-        },
-        {
-            "id" : "1",
-            "name" : "Valentino",
-            "lastname" : "Anna",
-            "age" : "23",
-            "job" : "Secretary",
-            "tel" : "0123456789"
-        },
-        {
-            "id" : "2",
-            "name" : "Barak",
-            "lastname" : "Shaima",
-            "age" : "40",
-            "job" : "Financial assistant",
-            "tel" : "0123456789"
-        }
-    ];
-    res.json(users);
-});
-
-app.get('/users/1', function (req,res){
-    var user =
-        {
-            "id" : "1",
-            "name" : "Valentino",
-            "lastname" : "Anna",
-            "age" : "23",
-            "job" : "Secretary",
-            "tel" : "0123456789"
-        };
-    res.json(user);
-});
+//import routing
+require('./routing/callback');
+require('./routing/users');
 
 app.listen(8080);

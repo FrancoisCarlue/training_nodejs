@@ -1,19 +1,3 @@
-app.get('/callback', function(req,res){
+var callback = require('../controllers/callback');
 
-    var returnResponseOfFileJson = function (content){
-        res.json(content);
-    };
-
-    fs.readFileAsync('test.json')
-        .then(logContentOfFile)
-        .then(JSON.parse)
-        .then(returnResponseOfFileJson)
-    ;
-
-    console.log('autre chose');
-});
-
-function logContentOfFile(content){
-    console.log(content);
-    return content;
-}
+app.get('/callback', callback.index);
