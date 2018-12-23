@@ -1,5 +1,7 @@
 var path = require('path');
 var express = require('express');
+var Promise = require('bluebird');
+var fs = Promise.promisifyAll(require('fs'));
 
 var app = express();
 
