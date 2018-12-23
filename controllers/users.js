@@ -5,7 +5,7 @@ exports.index = function (req,res) { //affichage d'une collection de la BDD
 
     //on doit préparer la collection à l'avance, impossible de l'executer en Async directement
     // donc on chaine toutes nos taches pour préparer la collection puis on fait un execAsync
-    models.User.find().sort({name:1}).limit(2).execAsync() //noms triés dans l'odre alphabétique, seulement 2 noms max
+    models.User.find().sort({name:1}).select('name age').execAsync() //noms triés dans l'odre alphabétique, seulement le nom et l'age
         .then(logLib.logContent)
         .then(returnReponse)
     ;
