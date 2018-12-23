@@ -11,10 +11,15 @@ exports.index = function(req,res){
         res.json(content);
     };
 
+    var returnError = function () {
+        res.status(500).send('le fichier est manquant');
+    };
+
     fs.readFileAsync('test.json')
         .then(logLib.logContentOfFile)
         .then(JSON.parse)
-        .then(returnResponseOfFileJson)
+        .catch(logLib.throwError)
+        .done(returnResponseOfFileJson, returnError)
     ;
 
     console.log('autre chose');
