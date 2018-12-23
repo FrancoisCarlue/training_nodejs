@@ -16,7 +16,7 @@ exports.index = function(req,res){
     };
 
     fs.readFileAsync('test.json')
-        .then(logLib.logContentOfFile)
+        .then(logLib.logContent)
         .then(JSON.parse)
         .catch(logLib.throwError)
         .done(returnResponseOfFileJson, returnError)
