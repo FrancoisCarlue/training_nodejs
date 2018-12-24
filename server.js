@@ -8,7 +8,19 @@ exphbs = require('express-handlebars');
 
 app = express(); // mis en global pour que ce soit accessible aux autres fichiers de routing
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+var hbs = exphbs.create({
+    helpers: {
+        renderName: function(user){
+            return 'Name : '+ user.name;
+        },
+        renderLastName: function(user){
+            return 'Prenom : '+ user.lastname;
+        }
+    },
+    defaultLayout : 'main'
+});
+
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 var bodyParser = require('body-parser');
