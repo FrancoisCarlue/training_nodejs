@@ -49,6 +49,22 @@ exports.update = function(req,res){
 
     delete req.body['_id'];
 
-    models.User.findOneAndUpdate(options, req.body)
+    models.User.findOneAndUpdateAsync(options, req.body)
         .then(returnUpdatedObject);
+}
+
+exports.delete = function(req,res){
+    var returnResponse = function (obj) {
+        res.json({message : 'All is fine'});
+    };
+
+    var returnError = function(obj){
+        res.status(500).json({message: 'SERVER PROBLEM'})
+    };
+
+    var options = {_id:req.params.id};
+
+    models.User.findOneAndRemoveAsync(options)
+        .catch(logLib.throwError)
+        .done(returnResponse, returnError);
 }
