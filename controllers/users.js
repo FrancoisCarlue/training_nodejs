@@ -32,3 +32,23 @@ exports.create = function(req,res){
         .then(logLib.logContent)
         .then(returnResponse);
 }
+
+exports.update = function(req,res){
+    var returnResponse = function (obj) {
+        res.json(obj);
+    };
+
+    var options = {_id : req.body._id};
+
+    var returnUpdatedObject = function () {
+        models.User.findOneAsync(options)
+            .then(logLib.logContent)
+            .then(returnResponse)
+        ;
+    };
+
+    delete req.body['_id'];
+
+    models.User.findOneAndUpdate(options, req.body)
+        .then(returnUpdatedObject);
+}
