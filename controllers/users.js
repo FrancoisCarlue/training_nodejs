@@ -12,14 +12,15 @@ exports.index = function (req,res) { //affichage d'une collection de la BDD
 };
 
 exports.one = function (req,res){
+    var returnResponse = function(obj){
+        res.render('user',{user :obj});
+    };
+
     var options = {name:req.params.name}; //recup d'un user en fonction du parametre passé en URL de routage
-    var returnReponse = function(obj){
-        res.json(obj);
-    }
 
     models.User.findOneAsync(options)
         .then(logLib.logContent)
-        .then(returnReponse)
+        .then(returnResponse)
     ;
 };
 
