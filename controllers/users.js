@@ -22,3 +22,13 @@ exports.one = function (req,res){
         .then(returnReponse)
     ;
 };
+
+exports.create = function(req,res){
+    var returnResponse = function (obj) {
+        res.json(obj);
+    };
+
+    var user = models.User(req.body).saveAsync()
+        .then(logLib.logContent)
+        .then(returnResponse);
+}

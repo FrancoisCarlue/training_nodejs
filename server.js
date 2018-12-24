@@ -6,6 +6,9 @@ fs = Promise.promisifyAll(require('fs'));
 logLib = require('./lib/log'); //bien partir de la racine pour le require de notre lib maison
 app = express(); // mis en global pour que ce soit accessible aux autres fichiers de routing
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //config
 app.use(express.static('public'));
 mongoose.connect('mongodb://localhost/book_phone', { useNewUrlParser: true });
